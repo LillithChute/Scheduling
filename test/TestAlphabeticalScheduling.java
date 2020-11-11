@@ -1,0 +1,41 @@
+import static org.junit.Assert.assertEquals;
+
+import assignments.AlphabeticalSchedulingStrategy;
+import assignments.AssignmentList;
+import assignments.SchedulingStrategy;
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * This test the alphabetical scheduling of tasks.
+ */
+public class TestAlphabeticalScheduling {
+
+  private AssignmentList assignmentList;
+  private SchedulingStrategy strategy;
+
+  /**
+   * Setup the necessary values.
+   */
+  @Before
+  public void setup() {
+    TestData data = new TestData();
+    assignmentList = new AssignmentList();
+    assignmentList = data.getTestData(assignmentList);
+    strategy = new AlphabeticalSchedulingStrategy();
+
+  }
+
+  @Test
+  public void AlphabeticalSchedulingStrategyTest() {
+    assignmentList.scheduleAssignments(strategy);
+    assertEquals("Ordered by alphabetical\n"
+            + "1 -- Build landspeeder., starting 2021-10-01, ending 2021-12-15\n"
+            + "2 -- Create landspeeder blueprint, starting 2020-10-31, ending 2020-11-11\n"
+            + "3 -- Fix landspeeder issues., starting 2022-01-02, ending 2022-03-01\n"
+            + "4 -- Locate landspeeder parts., starting 2021-03-01, ending 2021-09-01\n"
+            + "5 -- Research required technology for landspeeder, starting 2020-04-01, ending 2020-11-11\n"
+            + "6 -- Revise landspeeder blueprint., starting 2020-11-23, ending 2021-03-16\n"
+            + "7 -- Test landspeeder., starting 2022-01-02, ending 2022-03-01\n", assignmentList.toString());
+  }
+}
